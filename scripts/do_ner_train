@@ -10,7 +10,7 @@ python3 run_ner.py \
     --init_checkpoint="$biobert_dir"/biobert_model.ckpt \
     --num_train_epochs=10.0 \
     --data_dir="$ner_dir/" \
-    --output_dir="$outdir"
+    --output_dir="$out_dir"
 
 ./do_detokenize.sh
-perl biocodes/conlleval.pl < "$outdir"/NER_result_conll.txt
+perl biocodes/conlleval.pl < "$out_dir"/NER_result_conll.txt
