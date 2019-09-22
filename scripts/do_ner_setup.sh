@@ -20,12 +20,12 @@ echo "Output directory is $out_dir"
 ######################################
 echo "Train data directory?"
 select dir in "Dir1" "Dir2"; do
-    case $yn in
+    case $dir in
         Dir1 ) export biobert_dir=""; break;;
         Dir2 ) export biobert_dir=""; break;;
     esac
 done
 echo "Train data location is $biobert_dir"
 
-export BIOBERT_DIR=$HOME/biobert/train_data/biobert_v1.0_pmc
-export NER_DIR=$HOME/biobert/train_data/NCBI-disease
+export biobert_dir=$HOME/biobert/train_data/biobert_v1.0_pmc
+export ner_dir=$HOME/biobert/train_data/NCBI-disease
