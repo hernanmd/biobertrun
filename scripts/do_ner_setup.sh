@@ -1,7 +1,11 @@
 #!/bin/bash
 
-base_outdir="/tmp/bioner"
+source libf_seldir.sh
+export base_outdir="/tmp/bioner"
+base_train_data="$HOME/biobert/train_data"
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
+
+[ -d "$base_train_data" ] || { echo "BioBERT train data directory should be $base_train_data"; exit 1; }
 
 ######################################
 # Output directory
@@ -13,19 +17,22 @@ select yn in "Yes" "No"; do
 		No ) export out_dir="$base_outidr"; exit;;
 	esac
 done
-echo "Output directory is $out_dir"
 
 ######################################
 # Train data
 ######################################
-echo "Train data directory?"
-select dir in "Dir1" "Dir2"; do
-    case $dir in
-        Dir1 ) export biobert_dir=""; break;;
-        Dir2 ) export biobert_dir=""; break;;
-    esac
-done
-echo "Train data location is $biobert_dir"
+echo "Train data directory? (should contain Checkpoint files .ckpt + config.json + vocab.txt)"
+select_dir "$base_train_data"
+export biobert_dir="$selected_dir"
 
-export biobert_dir=$HOME/biobert/train_data/biobert_v1.0_pmc
-export ner_dir=$HOME/biobert/train_data/NCBI-disease
+echo "NER data directory? (should contain .tsv files)"
+select_dir "$base_train_data"
+export ner_dir="$selected_dir"
+
+########################################
+# Review
+########################################
+
+echo "SETUP: Output directory is $out_dir"
+echo "SETUP: Train data location is $biobert_dir"
+echo "SETUP: NER location is $ner_dir"
