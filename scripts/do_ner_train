@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source do_setup.sh
+source do_ner_setup.sh
 
 python3 run_ner.py \
     --do_train=true \
